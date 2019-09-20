@@ -1,0 +1,7 @@
+{
+  "baseUrl": "http://localhost:8081",
+  "pluginsFile": false,
+  "supportFile": false,
+  "video": false,
+  "videoUploadOnPasses": false
+}
