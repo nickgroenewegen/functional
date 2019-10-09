@@ -16,7 +16,7 @@ const tap = fn => arg => {
 const head = arr => arr[0]
 
 // tail :: [a] -> a
-const tail = arr => arr[arr.length]
+const tail = arr => arr[arr.length - 1]
 
 // prop :: String a -> b -> *
 const prop = string => source => source[string]
