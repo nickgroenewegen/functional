@@ -16,6 +16,17 @@ const handleFormSubmit = compose(
   tap(preventDefault),
 )
 
+/*
+Or from left to right:
+const handleFormSubmit = pipe(
+  tap(preventDefault),
+  prop('target'),
+  prop('demo_number_input'),
+  prop('value'),
+  alert,
+)
+*/
+
 const runApp = compose(
   applyTo(handleFormSubmit),
   addListener('submit'),
@@ -23,4 +34,5 @@ const runApp = compose(
   useQuery(document),
 )
 
+// Let it loose!
 runApp('#demo')
