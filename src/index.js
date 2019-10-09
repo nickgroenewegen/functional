@@ -1,48 +1,26 @@
-import { querySelectorAll } from './dom/selection'
-import { addClass, removeClass } from './dom/classlist'
-import compose from './utilities/compose'
-import pipe from './utilities/pipe'
-import curry from './utilities/curry'
-import map from './utilities/map'
+import { useQuery } from './dom/query'
+import { addListener, preventDefault } from './dom/event'
+import {
+  compose,
+  head,
+  applyTo,
+  tap,
+  prop,
+} from './functional'
 
-// Curried.
-const getElementsAndAddClass = compose(
-  curry(map, addClass('red')),
-  Array.from,
-  querySelectorAll,
+const handleFormSubmit = compose(
+  alert,
+  prop('value'),
+  prop('demo_number_input'),
+  prop('target'),
+  tap(preventDefault),
 )
 
-getElementsAndAddClass('input, button')
-
-// Non curried.
-function mapAndRemoveClass(args) {
-  return map(removeClass('red'), args)
-}
-
-const getElementsAndRemoveClass = compose(
-  mapAndRemoveClass,
-  Array.from,
-  querySelectorAll,
+const runApp = compose(
+  applyTo(handleFormSubmit),
+  addListener('submit'),
+  head,
+  useQuery(document),
 )
 
-getElementsAndRemoveClass('input, button')
-
-// Curried map.
-const curriedMap = curry(map)
-
-const getElementsAndAddClassCurriedMap = compose(
-  curriedMap(addClass('green')),
-  Array.from,
-  querySelectorAll,
-)
-
-getElementsAndAddClassCurriedMap('input, button')
-
-// The other way arround.
-const getElementsAndAddClassPiped = pipe(
-  querySelectorAll,
-  Array.from,
-  curriedMap(addClass('orange')),
-)
-
-getElementsAndAddClassPiped('input, button')
+runApp('#demo')

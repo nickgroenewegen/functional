@@ -3,14 +3,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const config = {
-  // https://webpack.js.org/concepts#entry
-  entry: path.resolve(__dirname, '../src/index.js'),
-  // https://webpack.js.org/concepts#output
+  entry: {
+    js: path.resolve(__dirname, '../src/index.js'),
+  },
   output: {
     path: path.resolve(__dirname, '../build'),
     filename: '[name].[contenthash].js',
   },
-  // https://webpack.js.org/concepts/#loaders
   module: {
     rules: [{
       test: /\.js$/,
@@ -30,9 +29,15 @@ const config = {
       ],
       loader: 'eslint-loader',
       enforce: 'pre',
+    }, {
+      test: /\.s[ac]ss$/i,
+      use: [
+        'style-loader',
+        'css-loader',
+        'sass-loader',
+      ],
     }],
   },
-  // https://webpack.js.org/concepts#plugins
   plugins: [
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
