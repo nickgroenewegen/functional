@@ -8,10 +8,10 @@ const config = {
   collectCoverage: true,
   coverageThreshold: {
     global: {
-      statements: 95,
-      functions: 95,
-      branches: 95,
-      lines: 95,
+      statements: 100,
+      functions: 100,
+      branches: 100,
+      lines: 100,
     },
   },
   coverageReporters: [

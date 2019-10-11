@@ -5,10 +5,4 @@ const addListener = type => node => handler => {
   return () => node.removeEventListener(type, handler)
 }
 
-// preventDefault :: Event -> undefined
-const preventDefault = event => event.preventDefault()
-
-export {
-  addListener,
-  preventDefault,
-}
+export default addListener

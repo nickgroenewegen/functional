@@ -1,12 +1,8 @@
-import { useQuery } from './dom/query'
-import { addListener, preventDefault } from './dom/event'
-import {
-  compose,
-  head,
-  applyTo,
-  tap,
-  prop,
-} from './functional'
+import { query } from '@shared/dom-utilities/selection'
+import { addListener, preventDefault } from '@shared/dom-utilities/event'
+import { compose, prop, tap } from '@shared/functional-utilities/helpers'
+import { head } from '@shared/functional-utilities/point-free'
+import { T } from '@shared/functional-utilities/combinators'
 
 const handleFormSubmit = compose(
   alert,
@@ -28,10 +24,10 @@ const handleFormSubmit = pipe(
 */
 
 const runApp = compose(
-  applyTo(handleFormSubmit),
+  T(handleFormSubmit),
   addListener('submit'),
   head,
-  useQuery(document),
+  query(document),
 )
 
 // Let it loose!
